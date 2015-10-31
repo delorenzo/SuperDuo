@@ -8,23 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class About extends Fragment {
+public class AboutFragment extends Fragment {
 
-    public About(){
+    public AboutFragment(){
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_about, container, false);
-        return rootView;
+        getActivity().setTitle(R.string.about);
+        return inflater.inflate(R.layout.fragment_about, container, false);
     }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        activity.setTitle(R.string.about);
-    }
-
 }
