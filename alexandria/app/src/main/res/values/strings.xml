@@ -17,7 +17,6 @@
 
     <string name="ok_button">Next</string>
     <string name="cancel_button">Cancel</string>
-    <string name="not_found">No Book Found</string>
     <string name="search">Search</string>
     <string name="delete">Delete Book</string>
     <string name="pref_startScreen">Select Start Screen</string>
@@ -25,4 +24,11 @@
     <string name="action_share">Share</string>
     <string name="back_button">Go Back</string>
     <string name="share_text">A must read book: </string>
+
+    <!-- forecast base URL -->
+    <string name="forecast_url" translatable="false">https://www.googleapis.com/books/v1/volumes?</string>
+
+    <!-- toast messages for the user -->
+    <string name="no_connection">No connection.  Verify that you have a valid connection.</string>
+    <string name="not_found">No Book Found</string>
 </resources>

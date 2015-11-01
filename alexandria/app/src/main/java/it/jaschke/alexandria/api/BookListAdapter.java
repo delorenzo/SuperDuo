@@ -10,25 +10,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import it.jaschke.alexandria.R;
-import it.jaschke.alexandria.data.AlexandriaContract;
-import it.jaschke.alexandria.services.DownloadImage;
+import it.jaschke.alexandria.data.BookContract;
 
 /**
  * Created by saj on 11/01/15.
  */
 public class BookListAdapter extends CursorAdapter {
-
-
     public static class ViewHolder {
-        public final ImageView bookCover;
-        public final TextView bookTitle;
-        public final TextView bookSubTitle;
+        @Bind(R.id.fullBookCover) ImageView bookCover;
+        @Bind(R.id.listBookTitle) TextView bookTitle;
+        @Bind(R.id.listBookSubTitle) TextView bookSubTitle;
 
         public ViewHolder(View view) {
-            bookCover = (ImageView) view.findViewById(R.id.fullBookCover);
-            bookTitle = (TextView) view.findViewById(R.id.listBookTitle);
-            bookSubTitle = (TextView) view.findViewById(R.id.listBookSubTitle);
+            ButterKnife.bind(this, view);
         }
     }
 
@@ -38,16 +37,17 @@ public class BookListAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-
         ViewHolder viewHolder = (ViewHolder) view.getTag();
 
-        String imgUrl = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
-        new DownloadImage(viewHolder.bookCover).execute(imgUrl);
+        String imgUrl = cursor.getString(cursor.getColumnIndex(BookContract.BookEntry.IMAGE_URL));
+        Picasso.with(context)
+                .load(imgUrl)
+                .into(viewHolder.bookCover);
 
-        String bookTitle = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.TITLE));
+        String bookTitle = cursor.getString(cursor.getColumnIndex(BookContract.BookEntry.TITLE));
         viewHolder.bookTitle.setText(bookTitle);
 
-        String bookSubTitle = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
+        String bookSubTitle = cursor.getString(cursor.getColumnIndex(BookContract.BookEntry.SUBTITLE));
         viewHolder.bookSubTitle.setText(bookSubTitle);
     }
 

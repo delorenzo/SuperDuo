@@ -12,21 +12,20 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
-import it.jaschke.alexandria.data.AlexandriaContract;
+import it.jaschke.alexandria.data.BookContract;
 import it.jaschke.alexandria.services.BookService;
-import it.jaschke.alexandria.services.DownloadImage;
 
 
 public class AddBookFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -118,6 +117,9 @@ public class AddBookFragment extends Fragment implements LoaderManager.LoaderCal
             eanView.setText(barcode);
             startBookIntent(barcode);
         }
+        else {
+            eanView.setText("");
+        }
     }
 
     @OnClick(R.id.delete_button)
@@ -149,7 +151,7 @@ public class AddBookFragment extends Fragment implements LoaderManager.LoaderCal
         }
         return new CursorLoader(
                 getActivity(),
-                AlexandriaContract.BookEntry.buildFullBookUri(Long.parseLong(eanStr)),
+                BookContract.BookEntry.buildFullBookUri(Long.parseLong(eanStr)),
                 null,
                 null,
                 null,
@@ -163,24 +165,26 @@ public class AddBookFragment extends Fragment implements LoaderManager.LoaderCal
             return;
         }
 
-        String bookTitle = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.TITLE));
+        String bookTitle = data.getString(data.getColumnIndex(BookContract.BookEntry.TITLE));
         bookTitleView.setText(bookTitle);
 
-        String bookSubTitle = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
+        String bookSubTitle = data.getString(data.getColumnIndex(BookContract.BookEntry.SUBTITLE));
         bookSubTitleView.setText(bookSubTitle);
 
-        String authors = data.getString(data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
+        String authors = data.getString(data.getColumnIndex(BookContract.AuthorEntry.AUTHOR));
         String[] authorsArr = authors.split(",");
         authorsView.setLines(authorsArr.length);
         authorsView.setText(authors.replace(",", "\n"));
 
-        String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
+        String imgUrl = data.getString(data.getColumnIndex(BookContract.BookEntry.IMAGE_URL));
         if(Patterns.WEB_URL.matcher(imgUrl).matches()){
-            new DownloadImage(bookCoverImage).execute(imgUrl);
+            Picasso.with(getContext())
+                    .load(imgUrl)
+                    .into(bookCoverImage);
             bookCoverImage.setVisibility(View.VISIBLE);
         }
 
-        String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
+        String categories = data.getString(data.getColumnIndex(BookContract.CategoryEntry.CATEGORY));
         categoriesView.setText(categories);
 
         rootView.findViewById(R.id.save_button).setVisibility(View.VISIBLE);

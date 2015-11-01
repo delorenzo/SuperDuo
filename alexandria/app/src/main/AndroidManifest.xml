@@ -30,7 +30,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <!-- barcode capture activity -->
+        <!-- barcode capture activity - allows capture in any orientation-->
         <activity
             android:name=".CaptureActivityAnyOrientation"
             android:screenOrientation="fullSensor"
