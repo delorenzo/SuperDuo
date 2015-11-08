@@ -1,4 +1,4 @@
-package barqsoft.footballscores;
+package barqsoft.footballscores.data;
 
 import android.content.ContentResolver;
 import android.net.Uri;
@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
 /**
  * Created by yehya khaled on 2/25/2015.
  */
-public class DatabaseContract
+public class FootballScoresContract
 {
     public static final String SCORES_TABLE = "scores_table";
     public static final class scores_table implements BaseColumns
