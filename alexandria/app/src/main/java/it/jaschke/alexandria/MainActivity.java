@@ -79,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             case 2:
                 nextFragment = new AboutFragment();
                 break;
+            case 3:
+                nextFragment = new SettingsFragment();
+                break;
 
         }
 

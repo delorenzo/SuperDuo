@@ -67,6 +67,7 @@ public class AddBookFragment extends Fragment implements LoaderManager.LoaderCal
             eanView.setHint("");
         }
 
+        getActivity().setTitle(R.string.scan);
         return rootView;
     }
 

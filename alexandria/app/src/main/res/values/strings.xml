@@ -19,8 +19,13 @@
     <string name="cancel_button">Cancel</string>
     <string name="search">Search</string>
     <string name="delete">Delete Book</string>
-    <string name="pref_startScreen">Select Start Screen</string>
+
+    <!-- preference activity strings -->
+    <string name="pref_startScreen_key" translatable="false">pref_startFragment</string>
+    <string name="pref_startScreen_title">Select Start Screen</string>
+    <string name="pref_startScreen_default">0</string>
     <string name="title_activity_settings">Settings</string>
+
     <string name="action_share">Share</string>
     <string name="back_button">Go Back</string>
     <string name="share_text">A must read book: </string>
@@ -31,4 +36,7 @@
     <!-- toast messages for the user -->
     <string name="no_connection">No connection.  Verify that you have a valid connection.</string>
     <string name="not_found">No Book Found</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
