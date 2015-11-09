@@ -19,7 +19,7 @@ public class Utilities
         {
             case SERIE_A : return context.getString(R.string.seria_a);
             case PREMIER_LEAGUE: return context.getString(R.string.premier_league);
-            case CHAMPIONS_LEAGUE : return context.getString(R.string.champions_league);
+            case CHAMPIONS_LEAGUE : return context.getString(R.string.uefa_champions_league);
             case PRIMERA_DIVISION : return context.getString(R.string.primera_division);
             case BUNDESLIGA : return context.getString(R.string.bundesliga);
             default: return context.getString(R.string.unknown_league);
