@@ -25,7 +25,6 @@ public class FootballScoresAdapter extends CursorAdapter
     public static final int COL_ID = 8;
     public static final int COL_MATCHTIME = 2;
     public double detail_match_id = 0;
-    private String FOOTBALL_SCORES_HASHTAG = "#Football_Scores";
     public FootballScoresAdapter(Context context, Cursor cursor, int flags)
     {
         super(context,cursor,flags);
@@ -73,7 +72,8 @@ public class FootballScoresAdapter extends CursorAdapter
                 public void onClick(View v)
                 {
                     //add Share Action
-                    context.startActivity(createShareForecastIntent(mHolder.homeName.getText()+" "
+                    context.startActivity(createShareForecastIntent(context,
+                            mHolder.homeName.getText()+" "
                     +mHolder.score.getText()+" "+mHolder.awayName.getText() + " "));
                 }
             });
@@ -84,11 +84,11 @@ public class FootballScoresAdapter extends CursorAdapter
         }
 
     }
-    public Intent createShareForecastIntent(String ShareText) {
+    public Intent createShareForecastIntent(Context context, String shareText) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText + FOOTBALL_SCORES_HASHTAG);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.football_scores_sharetext, shareText));
         return shareIntent;
     }
 }
