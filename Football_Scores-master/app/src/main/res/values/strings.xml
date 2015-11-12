@@ -15,6 +15,8 @@
     <string name="tomorrow">Tomorrow</string>
     <string name="share">Share</string>
     <string name="about">About</string>
+
+    <!-- text descriptions -->
     <string name="about_text">
         This application gets the Football Matches Score for the Premier League,
         Seria A, Bundesliga, Primera Division and the Uefa Champions League.
@@ -60,4 +62,11 @@
     <string name="football_scores_sharetext">
         <xliff:g id="share_text">$s</xliff:g>#Football_Scores
     </string>
+
+    <!-- widget -->
+    <string name="title_widget">Today\'s Games</string>
+
+    <!-- placeholder accessibility strings -->
+    <string name="home_crest">Home Crest</string>
+    <string name="away_crest">Away Crest</string>
 </resources>

@@ -5,6 +5,6 @@
     android:minResizeHeight="@dimen/widget_minimum_height"
     android:minResizeWidth="@dimen/widget_minimum_width"
     android:updatePeriodMillis="0"
-    android:previewImage="@mipmap/ic_launcher"
+    android:previewImage="@drawable/ic_launcher"
     android:initialLayout="@layout/widget">
 </appwidget-provider>
