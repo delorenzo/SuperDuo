@@ -148,7 +148,7 @@ public class ScoresSyncService extends IntentService
         final String MATCH_LINK = "http://api.football-data.org/alpha/fixtures/";
         final String FIXTURES = "fixtures";
         final String LINKS = "_links";
-        final String SOCCER_SEASON = "soccerSeason";
+        final String SOCCER_SEASON = "soccerseason";
         final String SELF = "self";
         final String MATCH_DATE = "date";
         final String HOME_TEAM = "homeTeamName";
@@ -156,7 +156,7 @@ public class ScoresSyncService extends IntentService
         final String RESULT = "result";
         final String HOME_GOALS = "goalsHomeTeam";
         final String AWAY_GOALS = "goalsAwayTeam";
-        final String MATCH_DAY = "matchDay";
+        final String MATCH_DAY = "matchday";
 
         //Match data
         String League;
@@ -183,15 +183,13 @@ public class ScoresSyncService extends IntentService
                 League = match_data.getJSONObject(LINKS).getJSONObject(SOCCER_SEASON).
                         getString("href");
                 League = League.replace(SEASON_LINK,"");
+
+                int leagueCode = Integer.parseInt(League);
                 //This if statement controls which leagues we're interested in the data from.
                 //add leagues here in order to have them be added to the DB.
                 // If you are finding no data in the app, check that this contains all the leagues.
                 // If it doesn't, that can cause an empty DB, bypassing the dummy data routine.
-                if(     League.equals(PREMIER_LEAGUE)      ||
-                        League.equals(SERIE_A)             ||
-                        League.equals(BUNDESLIGA1)         ||
-                        League.equals(BUNDESLIGA2)         ||
-                        League.equals(PRIMERA_DIVISION)     )
+                if(leagueCode >= 394 && leagueCode <= 404)
                 {
                     match_id = match_data.getJSONObject(LINKS).getJSONObject(SELF).
                             getString("href");
@@ -243,10 +241,9 @@ public class ScoresSyncService extends IntentService
                     values.add(match_values);
                 }
             }
-            int inserted_data;
             ContentValues[] insert_data = new ContentValues[values.size()];
             values.toArray(insert_data);
-            inserted_data = mContext.getContentResolver().bulkInsert(
+            int inserted_data = mContext.getContentResolver().bulkInsert(
                     FootballScoresContract.BASE_CONTENT_URI,insert_data);
 
             Log.v(LOG_TAG,"Successfully Inserted : " + String.valueOf(inserted_data));
@@ -254,6 +251,10 @@ public class ScoresSyncService extends IntentService
         catch (JSONException e)
         {
             Log.e(LOG_TAG,e.getMessage());
+        }
+        catch (NumberFormatException e)
+        {
+            Log.e(LOG_TAG, "League string was not a valid number:  " + e.getMessage());
         }
 
     }

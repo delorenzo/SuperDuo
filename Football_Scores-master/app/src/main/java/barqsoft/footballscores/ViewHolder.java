@@ -7,9 +7,6 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * Created by yehya khaled on 2/26/2015.
- */
 public class ViewHolder
 {
     @Bind(R.id.home_name) TextView homeName;

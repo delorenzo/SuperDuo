@@ -2,9 +2,6 @@ package barqsoft.footballscores;
 
 import android.content.Context;
 
-/**
- * Created by yehya khaled on 3/3/2015.
- */
 public class Utilities
 {
     public static final int SERIE_A = 357;
@@ -52,7 +49,7 @@ public class Utilities
         }
         else
         {
-            return context.getString(R.string.matchday, match_day);
+            return String.format(context.getString(R.string.matchday), match_day);
         }
     }
 
@@ -64,7 +61,7 @@ public class Utilities
         }
         else
         {
-            return context.getString(R.string.score, homeGoals, awayGoals);
+            return String.format(context.getString(R.string.score), homeGoals, awayGoals);
         }
     }
 
@@ -72,7 +69,7 @@ public class Utilities
     {
         if (teamName == null){return R.drawable.no_icon;}
         switch (teamName)
-        { //This is the set of icons that are currently in the app. Feel free to find and add more
+        {   //This is the set of icons that are currently in the app. Feel free to find and add more
             //as you go.
             case "Arsenal London FC" : return R.drawable.arsenal;
             case "Manchester United FC" : return R.drawable.manchester_united;

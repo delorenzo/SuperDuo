@@ -48,22 +48,21 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
                              final Bundle savedInstanceState) {
         update_scores();
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        ButterKnife.bind(this, rootView);
+
         mAdapter = new FootballScoresAdapter(getActivity(),null,0);
         scoreList.setAdapter(mAdapter);
         getLoaderManager().initLoader(SCORES_LOADER, null, this);
         mAdapter.detail_match_id = MainActivity.selected_match_id;
-        scoreList.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        scoreList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ViewHolder selected = (ViewHolder) view.getTag();
                 mAdapter.detail_match_id = selected.matchId;
                 MainActivity.selected_match_id = (int) selected.matchId;
                 mAdapter.notifyDataSetChanged();
             }
         });
-        ButterKnife.bind(this, rootView);
         return rootView;
     }
 
