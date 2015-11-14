@@ -4,15 +4,23 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="4dp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.v7.widget.CardView
+        android:elevation="@dimen/cardview_default_elevation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scores_card_view"
         android:layout_gravity="center"
-        card_view:cardCornerRadius="4dp">
+        android:paddingTop="@dimen/abc_dialog_list_padding_vertical_material"
+        android:paddingBottom="@dimen/abc_dialog_list_padding_vertical_material"
+        android:paddingStart="@dimen/abc_list_item_padding_horizontal_material"
+        android:paddingLeft="@dimen/abc_list_item_padding_horizontal_material"
+        android:paddingRight="@dimen/abc_list_item_padding_horizontal_material"
+        android:paddingEnd="@dimen/abc_list_item_padding_horizontal_material"
+        android:layout_marginBottom="@dimen/card_vertical_margin"
+        android:layout_marginTop="@dimen/card_vertical_margin"
+        card_view:cardCornerRadius="@dimen/card_radius">
 
         <android.support.v7.widget.GridLayout
             android:layout_width="match_parent"

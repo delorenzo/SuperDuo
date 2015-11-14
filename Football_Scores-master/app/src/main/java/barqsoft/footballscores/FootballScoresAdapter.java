@@ -27,7 +27,7 @@ public class FootballScoresAdapter extends CursorAdapter
     public double detail_match_id = 0;
     public FootballScoresAdapter(Context context, Cursor cursor, int flags)
     {
-        super(context,cursor,flags);
+        super(context, cursor, flags);
     }
 
     @Override
@@ -48,11 +48,14 @@ public class FootballScoresAdapter extends CursorAdapter
         mHolder.date.setText(cursor.getString(COL_MATCHTIME));
         mHolder.score.setText(Utilities.getScores(context, cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));
         mHolder.matchId = cursor.getDouble(COL_ID);
-        mHolder.homeCrest.setImageResource(Utilities.getTeamCrestByTeamName(
-                cursor.getString(COL_HOME)));
-        mHolder.awayCrest.setImageResource(Utilities.getTeamCrestByTeamName(
-                cursor.getString(COL_AWAY)
-        ));
+        String homeTeamName = cursor.getString(COL_HOME);
+        String awayTeamName = cursor.getString(COL_AWAY);
+        mHolder.homeCrest.setImageResource(Utilities.getTeamCrestByTeamName(homeTeamName));
+        mHolder.homeCrest.setContentDescription(
+                String.format(context.getString(R.string.home_crest), homeTeamName));
+        mHolder.awayCrest.setImageResource(Utilities.getTeamCrestByTeamName(awayTeamName));
+        mHolder.awayCrest.setContentDescription(
+                String.format(context.getString(R.string.away_crest), awayTeamName));
         LayoutInflater vi = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = vi.inflate(R.layout.detail_fragment, null);
@@ -61,8 +64,8 @@ public class FootballScoresAdapter extends CursorAdapter
         {
             container.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
                     , ViewGroup.LayoutParams.MATCH_PARENT));
-            TextView match_day = (TextView) v.findViewById(R.id.matchday_textview);
-            match_day.setText(Utilities.getMatchDay(context, cursor.getInt(COL_MATCHDAY),
+            TextView matchDay = (TextView) v.findViewById(R.id.matchday_textview);
+            matchDay.setText(Utilities.getMatchDay(context, cursor.getInt(COL_MATCHDAY),
                     cursor.getInt(COL_LEAGUE)));
             TextView league = (TextView) v.findViewById(R.id.league_textview);
             league.setText(Utilities.getLeague(context, cursor.getInt(COL_LEAGUE)));
@@ -84,6 +87,7 @@ public class FootballScoresAdapter extends CursorAdapter
         }
 
     }
+
     public Intent createShareForecastIntent(Context context, String shareText) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);

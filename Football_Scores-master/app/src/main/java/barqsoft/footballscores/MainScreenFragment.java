@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import barqsoft.footballscores.data.FootballScoresContract;
 import barqsoft.footballscores.service.ScoresSyncService;
@@ -25,6 +26,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
 {
     public FootballScoresAdapter mAdapter;
     @Bind(R.id.scores_list) ListView scoreList;
+    @Bind(R.id.empty_matches_textview) TextView emptyView;
     public static final int SCORES_LOADER = 0;
     private String[] fragmentdate = new String[1];
     private int last_selected_item = -1;
@@ -63,6 +65,8 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
                 mAdapter.notifyDataSetChanged();
             }
         });
+        int emptyViewVisbility = mAdapter.isEmpty() ? TextView.VISIBLE : TextView.GONE;
+        emptyView.setVisibility(emptyViewVisbility);
         return rootView;
     }
 

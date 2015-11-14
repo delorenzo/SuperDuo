@@ -6,7 +6,7 @@
     <string name="title_activity_about">AboutActivity</string>
 
     <!-- api key can be obtained from http://api.football-data.org/register -->
-    <string name="api_key" translatable="false">API Key Here</string>
+    <string name="api_key" translatable="false"></string>
 
     <string name="action_settings">Settings</string>
     <string name="test_text">Test</string>
@@ -38,8 +38,12 @@
     <string name="premier_league">Premier League</string>;
     <string name="uefa_champions_league">UEFA Champions League</string>
     <string name="primera_division">Primera Division</string>
+    <string name="segunda_division">Segunda Division</string>
     <string name="bundesliga">Bundesliga</string>
-    <string name="unknown_league">Unknown League Please report</string>
+    <string name="ligue">Ligue</string>
+    <string name="primera_liga">Primera Liga</string>
+    <string name="eredivisie">Eredivisie</string>
+    <string name="unknown_league">Unknown league please report</string>
 
     <!-- match day strings -->
     <string name="matchday">Match day:  <xliff:g id="day">%1$d</xliff:g></string>
@@ -51,10 +55,10 @@
     <string name="final_text">Final</string>
 
     <!-- scores -->
-    <string name="no_score" translatable="false"> - </string>
+    <string name="no_score" translatable="false"> &#8211; </string>
     <string name="score" translatable="false">
         <xliff:g id="home_score" example="5">%1$d</xliff:g>
-         -
+         &#8211;
         <xliff:g id="away_score" example="1">%2$d</xliff:g>
     </string>
 
@@ -66,13 +70,21 @@
     <!-- widget -->
     <string name="title_widget">Today\'s Games</string>
 
-    <!-- placeholder accessibility strings -->
-    <string name="home_crest">Home Crest</string>
-    <string name="away_crest">Away Crest</string>
+    <!--accessibility strings -->
+    <string name="home_crest">
+        <xliff:g id="team_name" example="Arsenal London FC">%1$s</xliff:g> Home Crest
+    </string>
+
+    <string name="away_crest">
+        <xliff:g id="team_name" example="Arsenal London FC">%1$s</xliff:g> Away Crest
+    </string>
 
     <!-- hint strings -->
     <string name="home_placeholder">FC St. Pauli</string>
     <string name="away_placeholder">Fortuna Dusseldorf</string>
-    <string name="score_placeholder">4 - 0</string>
+    <string name="score_placeholder">4 &#8211; 0</string>
     <string name="time_placeholder">14:15</string>
+
+    <!-- empty string for no matches -->
+    <string name="empty_matches">No matches to display.</string>
 </resources>
