@@ -1,28 +1,40 @@
 package barqsoft.footballscores;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener
 {
     public static int selected_match_id;
     public static int current_fragment = 2;
-    public static String LOG_TAG = "MainActivity";
-    private final String save_tag = "Save Test";
-    private PagerFragment my_main;
+    private final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final String CURRENT_FRAGMENT = "current_fragment";
+    private static final String SELECTED_MATCH = "selected_match";
+    private static final String PAGER_FRAGMENT_TAG = "pager_fragment";
+    private static final String DATE_PICKER_FRAGMENT_TAG = "date_picker_fragment";
+    private PagerFragment mPagerFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            my_main = new PagerFragment();
+            mPagerFragment = new PagerFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, my_main)
+                    .add(R.id.container, mPagerFragment)
                     .commit();
         }
+    }
+
+    // update the pager fragment when the user selects a date from the date picker.
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        mPagerFragment.selectDate(year, monthOfYear, dayOfMonth);
     }
 
 
@@ -47,6 +59,10 @@ public class MainActivity extends AppCompatActivity
             startActivity(start_about);
             return true;
         }
+        else if (id == R.id.menu_item_date_picker) {
+            DialogFragment datePickerFragment = new DatePickerFragment();
+            datePickerFragment.show(getSupportFragmentManager(), DATE_PICKER_FRAGMENT_TAG);
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -54,18 +70,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onSaveInstanceState(Bundle outState)
     {
-        outState.putInt("Pager_Current",my_main.mPagerHandler.getCurrentItem());
-        outState.putInt("Selected_match",selected_match_id);
-        getSupportFragmentManager().putFragment(outState,"my_main",my_main);
+        outState.putInt(CURRENT_FRAGMENT, mPagerFragment.mPagerHandler.getCurrentItem());
+        outState.putInt(SELECTED_MATCH, selected_match_id);
+        getSupportFragmentManager().putFragment(outState,PAGER_FRAGMENT_TAG, mPagerFragment);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState)
     {
-        current_fragment = savedInstanceState.getInt("Pager_Current");
-        selected_match_id = savedInstanceState.getInt("Selected_match");
-        my_main = (PagerFragment) getSupportFragmentManager().getFragment(savedInstanceState,"my_main");
+        current_fragment = savedInstanceState.getInt(CURRENT_FRAGMENT);
+        selected_match_id = savedInstanceState.getInt(SELECTED_MATCH);
+        mPagerFragment = (PagerFragment) getSupportFragmentManager().getFragment(savedInstanceState,PAGER_FRAGMENT_TAG);
         super.onRestoreInstanceState(savedInstanceState);
     }
 }

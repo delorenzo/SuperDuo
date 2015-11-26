@@ -57,9 +57,9 @@
     <!-- scores -->
     <string name="no_score" translatable="false"> &#8211; </string>
     <string name="score" translatable="false">
-        <xliff:g id="home_score" example="5">%1$d</xliff:g>
+        <xliff:g example="5" id="home_score">%1$d</xliff:g>
          &#8211;
-        <xliff:g id="away_score" example="1">%2$d</xliff:g>
+        <xliff:g example="1" id="away_score">%2$d</xliff:g>
     </string>
 
     <!-- share intent -->
@@ -72,11 +72,11 @@
 
     <!--accessibility strings -->
     <string name="home_crest">
-        <xliff:g id="team_name" example="Arsenal London FC">%1$s</xliff:g> Home Crest
+        <xliff:g example="Arsenal London FC" id="team_name">%1$s</xliff:g> Home Crest
     </string>
 
     <string name="away_crest">
-        <xliff:g id="team_name" example="Arsenal London FC">%1$s</xliff:g> Away Crest
+        <xliff:g example="Arsenal London FC" id="team_name">%1$s</xliff:g> Away Crest
     </string>
 
     <!-- hint strings -->
@@ -87,4 +87,15 @@
 
     <!-- empty string for no matches -->
     <string name="empty_matches">No matches to display.</string>
+
+    <!-- date picker string-->?
+    <string name="date_picker">Select Date</string>
+
+    <!-- fragment date format -->
+    <string name="fragment_date_format" translatable="false">yyyy-MM-dd</string>
+    <string name="day_of_week_format" translatable="false">EEEE</string>
+    <string name="month_day_format" translatable="false">MMM d</string>
+    <string name="day_title_format" translatable="false">
+        <xliff:g example="Today">%1$s</xliff:g>, <xliff:g example="Nov 5">%2$s</xliff:g>
+    </string>
 </resources>

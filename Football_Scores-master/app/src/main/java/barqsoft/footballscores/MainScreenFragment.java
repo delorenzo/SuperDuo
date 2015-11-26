@@ -1,5 +1,6 @@
 package barqsoft.footballscores;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -13,6 +14,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.joda.time.LocalDate;
+
+import java.util.Locale;
 
 import barqsoft.footballscores.data.FootballScoresContract;
 import barqsoft.footballscores.service.ScoresSyncService;
@@ -28,8 +33,9 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
     @Bind(R.id.scores_list) ListView scoreList;
     @Bind(R.id.empty_matches_textview) TextView emptyView;
     public static final int SCORES_LOADER = 0;
-    private String[] fragmentdate = new String[1];
-    private int last_selected_item = -1;
+    private LocalDate fragmentDate;
+    private String[] fragmentDateString = new String[1];
+    private int lastSelectedItem = -1;
 
     public MainScreenFragment()
     {
@@ -40,9 +46,18 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         Intent service_start = new Intent(getActivity(), ScoresSyncService.class);
         getActivity().startService(service_start);
     }
-    public void setFragmentDate(String date)
+
+    public void setFragmentDate(LocalDate date, Context context)
     {
-        fragmentdate[0] = date;
+        fragmentDate = date;
+        fragmentDateString[0] = date.toString(
+                context.getString(R.string.fragment_date_format),
+                Locale.getDefault());
+    }
+
+    public LocalDate getFragmentDate()
+    {
+        return fragmentDate;
     }
 
     @Override
@@ -65,8 +80,6 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
                 mAdapter.notifyDataSetChanged();
             }
         });
-        int emptyViewVisbility = mAdapter.isEmpty() ? TextView.VISIBLE : TextView.GONE;
-        emptyView.setVisibility(emptyViewVisbility);
         return rootView;
     }
 
@@ -75,7 +88,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle)
     {
         return new CursorLoader(getActivity(), FootballScoresContract.scores_table.buildScoreWithDate(),
-                null,null,fragmentdate,null);
+                null,null, fragmentDateString, null);
     }
 
     @Override
@@ -90,6 +103,9 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         }
         mAdapter.swapCursor(cursor);
         mAdapter.notifyDataSetChanged();
+
+        int emptyViewVisbility = mAdapter.isEmpty() ? TextView.VISIBLE : TextView.GONE;
+        emptyView.setVisibility(emptyViewVisbility);
     }
 
     @Override
