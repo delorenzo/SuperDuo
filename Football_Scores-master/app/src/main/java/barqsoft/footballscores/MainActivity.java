@@ -11,8 +11,8 @@ import android.widget.DatePicker;
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener
 {
-    public static int selected_match_id;
-    public static int current_fragment = 2;
+    public static int selectedMatchId;
+    public static int currentFragment = 2;
     private final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final String CURRENT_FRAGMENT = "current_fragment";
     private static final String SELECTED_MATCH = "selected_match";
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     protected void onSaveInstanceState(Bundle outState)
     {
         outState.putInt(CURRENT_FRAGMENT, mPagerFragment.mPagerHandler.getCurrentItem());
-        outState.putInt(SELECTED_MATCH, selected_match_id);
+        outState.putInt(SELECTED_MATCH, selectedMatchId);
         getSupportFragmentManager().putFragment(outState,PAGER_FRAGMENT_TAG, mPagerFragment);
         super.onSaveInstanceState(outState);
     }
@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState)
     {
-        current_fragment = savedInstanceState.getInt(CURRENT_FRAGMENT);
-        selected_match_id = savedInstanceState.getInt(SELECTED_MATCH);
+        currentFragment = savedInstanceState.getInt(CURRENT_FRAGMENT);
+        selectedMatchId = savedInstanceState.getInt(SELECTED_MATCH);
         mPagerFragment = (PagerFragment) getSupportFragmentManager().getFragment(savedInstanceState,PAGER_FRAGMENT_TAG);
         super.onRestoreInstanceState(savedInstanceState);
     }

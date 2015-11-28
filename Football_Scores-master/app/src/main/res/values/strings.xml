@@ -68,7 +68,8 @@
     </string>
 
     <!-- widget -->
-    <string name="title_widget">Today\'s Games</string>
+    <string name="title_information_widget">Today\'s Top Game</string>
+    <string name="title_collection_widget">Today\'s Top Games</string>
 
     <!--accessibility strings -->
     <string name="home_crest">

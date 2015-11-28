@@ -17,22 +17,14 @@ import java.util.Locale;
 
 public class PagerFragment extends Fragment
 {
-    public static final int NUM_PAGES = 5;
+    public static final int MAX_PAGES = 20;
     public ViewPager mPagerHandler;
-    private MyPagerAdapter mPagerAdapter;
-    private MainScreenFragment[] viewFragments = new MainScreenFragment[NUM_PAGES];
+    private ScoresPagerAdapter mPagerAdapter;
 
     public void selectDate(int year, int month, int day) {
-        LocalDate date = new LocalDate(year, month, day);
-        setupViewFragments(date);
-    }
-
-    private void setupViewFragments(LocalDate date) {
-        for (int i = 0;i < NUM_PAGES; i++)
-        {
-            viewFragments[i] = new MainScreenFragment();
-            viewFragments[i].setFragmentDate(date.plusDays(i-2), getContext());
-        }
+        mPagerAdapter.startingDate = new LocalDate(year, month, day);
+        mPagerHandler.setCurrentItem(MainActivity.currentFragment);
+        mPagerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -40,37 +32,39 @@ public class PagerFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.pager_fragment, container, false);
         mPagerHandler = (ViewPager) rootView.findViewById(R.id.pager);
-        MyPagerAdapter mPagerAdapter = new MyPagerAdapter(getChildFragmentManager());
-        setupViewFragments(new LocalDate());
+        mPagerAdapter = new ScoresPagerAdapter(getChildFragmentManager(), new LocalDate());
         mPagerHandler.setAdapter(mPagerAdapter);
-        mPagerHandler.setCurrentItem(MainActivity.current_fragment);
+        mPagerHandler.setCurrentItem(MainActivity.currentFragment);
         return rootView;
     }
 
 
-    private class MyPagerAdapter extends FragmentStatePagerAdapter
+    private class ScoresPagerAdapter extends FragmentStatePagerAdapter
     {
+        private LocalDate startingDate;
+
         @Override
         public Fragment getItem(int i)
         {
-            return viewFragments[i];
+            return MainScreenFragment.newInstance(startingDate.plusDays(i-2), getContext());
         }
 
         @Override
         public int getCount()
         {
-            return NUM_PAGES;
+            return MAX_PAGES;
         }
 
-        public MyPagerAdapter(FragmentManager fm)
+        public ScoresPagerAdapter(FragmentManager fm, LocalDate date)
         {
             super(fm);
+            startingDate = date;
         }
 
         // Returns the page title for the top indicator
         @Override
         public CharSequence getPageTitle(int position) {
-            LocalDate date = viewFragments[position].getFragmentDate();
+            LocalDate date = startingDate.plusDays(position-2);
             String dayName = getDayName(getActivity(),date);
             return String.format(
                     getString(R.string.day_title_format),
@@ -78,6 +72,14 @@ public class PagerFragment extends Fragment
                     date.toString(getString(R.string.month_day_format))
             );
         }
+
+        //this is called when notifyDataSetChanged() is called
+        @Override
+        public int getItemPosition(Object object) {
+            // refresh all fragments when data set changed
+            return FragmentStatePagerAdapter.POSITION_NONE;
+        }
+
 
         public String getDayName(Context context, LocalDate date) {
             // If the date is today, return the localized version of "Today" instead of the actual

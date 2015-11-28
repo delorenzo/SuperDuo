@@ -37,9 +37,9 @@
         </activity>
         <service android:name=".service.ScoresSyncService" />
 
-        <!-- Widget provider -->
-        <receiver android:name=".widget.FootballScoresWidgetProvider"
-            android:label="@string/title_widget">
+        <!-- Information widget provider -->
+        <receiver android:name=".widget.InformationWidgetProvider"
+            android:label="@string/title_information_widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.example.android.sunshine.app.ACTION_DATA_UPDATED" />
@@ -48,9 +48,25 @@
                 android:resource="@xml/widget_info"/>
         </receiver>
 
-        <!-- Today widget service -->
+        <!-- Information widget service -->
         <service
-            android:name=".widget.FootballScoresWidgetService">
+            android:name=".widget.InformationWidgetService">
+        </service>
+
+        <!-- Collection widget provider -->
+        <receiver android:name=".widget.CollectionWidgetProvider"
+            android:label="@string/title_collection_widget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.android.sunshine.app.ACTION_DATA_UPDATED" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info"/>
+        </receiver>
+
+        <!-- Collection widget service -->
+        <service
+            android:name=".widget.CollectionWidgetService">
         </service>
     </application>
 

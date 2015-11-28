@@ -41,6 +41,16 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
     {
     }
 
+    public static MainScreenFragment newInstance(LocalDate date, Context context)
+    {
+        MainScreenFragment fragment = new MainScreenFragment();
+        fragment.fragmentDate = date;
+        fragment.fragmentDateString[0] = date.toString(
+                context.getString(R.string.fragment_date_format),
+                Locale.getDefault());
+        return fragment;
+    }
+
     private void update_scores()
     {
         Intent service_start = new Intent(getActivity(), ScoresSyncService.class);
@@ -70,13 +80,13 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         mAdapter = new FootballScoresAdapter(getActivity(),null,0);
         scoreList.setAdapter(mAdapter);
         getLoaderManager().initLoader(SCORES_LOADER, null, this);
-        mAdapter.detail_match_id = MainActivity.selected_match_id;
+        mAdapter.detail_match_id = MainActivity.selectedMatchId;
         scoreList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ViewHolder selected = (ViewHolder) view.getTag();
                 mAdapter.detail_match_id = selected.matchId;
-                MainActivity.selected_match_id = (int) selected.matchId;
+                MainActivity.selectedMatchId = (int) selected.matchId;
                 mAdapter.notifyDataSetChanged();
             }
         });
@@ -104,8 +114,8 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         mAdapter.swapCursor(cursor);
         mAdapter.notifyDataSetChanged();
 
-        int emptyViewVisbility = mAdapter.isEmpty() ? TextView.VISIBLE : TextView.GONE;
-        emptyView.setVisibility(emptyViewVisbility);
+        int emptyViewVisibility = mAdapter.isEmpty() ? TextView.VISIBLE : TextView.GONE;
+        emptyView.setVisibility(emptyViewVisibility);
     }
 
     @Override
@@ -113,6 +123,5 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
     {
         mAdapter.swapCursor(null);
     }
-
 
 }

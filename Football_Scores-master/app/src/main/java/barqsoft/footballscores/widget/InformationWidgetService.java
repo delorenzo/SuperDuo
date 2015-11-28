@@ -9,12 +9,9 @@ import android.support.annotation.Nullable;
 import android.widget.RemoteViews;
 
 
-/**
- * Created by Julie on 11/9/2015.
- */
-public class FootballScoresWidgetService extends IntentService {
+public class InformationWidgetService extends IntentService {
 
-    public FootballScoresWidgetService() { super("FootballScoresWidgetService"); }
+    public InformationWidgetService() { super("InformationWidgetService"); }
 
     @Nullable
     @Override
