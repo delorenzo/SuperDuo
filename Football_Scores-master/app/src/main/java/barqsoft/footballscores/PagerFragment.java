@@ -22,7 +22,9 @@ public class PagerFragment extends Fragment
     private ScoresPagerAdapter mPagerAdapter;
 
     public void selectDate(int year, int month, int day) {
-        mPagerAdapter.startingDate = new LocalDate(year, month, day);
+        //DatePicker expects 0 based month of year, but JodaTime expects 1 based.
+        //Add one to the month of year to account for this.
+        mPagerAdapter.startingDate = new LocalDate(year, month+1, day);
         mPagerHandler.setCurrentItem(MainActivity.currentFragment);
         mPagerAdapter.notifyDataSetChanged();
     }

@@ -45,7 +45,7 @@
                 <action android:name="com.example.android.sunshine.app.ACTION_DATA_UPDATED" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info"/>
+                android:resource="@xml/information_widget_info"/>
         </receiver>
 
         <!-- Information widget service -->
@@ -61,7 +61,7 @@
                 <action android:name="com.example.android.sunshine.app.ACTION_DATA_UPDATED" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info"/>
+                android:resource="@xml/information_widget_info"/>
         </receiver>
 
         <!-- Collection widget service -->

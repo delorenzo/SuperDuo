@@ -67,7 +67,7 @@
         <xliff:g id="share_text">%1$s</xliff:g>#Football_Scores
     </string>
 
-    <!-- widget -->
+    <!-- information_widget -->
     <string name="title_information_widget">Today\'s Top Game</string>
     <string name="title_collection_widget">Today\'s Top Games</string>
 
