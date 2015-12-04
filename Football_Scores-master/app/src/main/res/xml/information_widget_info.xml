@@ -4,7 +4,8 @@
     android:minHeight="@dimen/widget_default_height"
     android:minResizeHeight="@dimen/widget_minimum_height"
     android:minResizeWidth="@dimen/widget_minimum_width"
-    android:updatePeriodMillis="0"
+    android:updatePeriodMillis="@string/widget_update_time"
     android:previewImage="@drawable/ic_launcher"
-    android:initialLayout="@layout/information_widget">
+    android:initialLayout="@layout/information_widget"
+    android:resizeMode="horizontal|vertical">
 </appwidget-provider>

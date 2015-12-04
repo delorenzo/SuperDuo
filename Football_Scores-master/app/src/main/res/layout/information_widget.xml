@@ -2,27 +2,45 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/widget"
     android:padding="@dimen/widget_margin"
     xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
+    <android.support.v7.widget.GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        app:columnCount="3">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/home_team"
-            tools:src="SC Paderborn 07"/>
+            android:padding="@dimen/widget_padding"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            tools:text="SC Paderborn 07"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/widget_padding"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/score"
-            tools:src="4 - 4"/>
+            app:layout_gravity="center"
+            app:layout_rowSpan="2"
+            tools:text="4 - 4"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/widget_padding"
             android:id="@+id/away_team"
-            tools:src="Armini Bielefield"/>
-    </LinearLayout>
+            tools:text="Armini Bielefield"/>
+        <ImageView
+            android:id="@+id/home_crest"
+            android:contentDescription="@string/home_placeholder"
+            app:layout_gravity="center_horizontal"
+            tools:src="@drawable/arsenal"/>
+        <ImageView
+            android:id="@+id/away_crest"
+            android:contentDescription="@string/away_placeholder"
+            app:layout_gravity="center_horizontal"
+            tools:src="@drawable/arsenal"/>
+    </android.support.v7.widget.GridLayout>
 </FrameLayout>

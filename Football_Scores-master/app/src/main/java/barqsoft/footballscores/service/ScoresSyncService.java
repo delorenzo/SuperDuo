@@ -19,6 +19,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.Vector;
 
@@ -49,7 +50,6 @@ public class ScoresSyncService extends IntentService
 
         Uri fetch_build = Uri.parse(BASE_URL).buildUpon().
                 appendQueryParameter(QUERY_TIME_FRAME, timeFrame).build();
-        //Log.v(LOG_TAG, "The url we are looking at is: "+fetch_build.toString()); //log spam
         HttpURLConnection m_connection = null;
         BufferedReader reader = null;
         String JSON_data = null;
@@ -85,7 +85,7 @@ public class ScoresSyncService extends IntentService
         }
         catch (Exception e)
         {
-            Log.e(LOG_TAG,"Exception here" + e.getMessage());
+            Log.e(LOG_TAG,"Exception:  " + e.getMessage());
         }
         finally {
             if(m_connection != null)
@@ -203,11 +203,11 @@ public class ScoresSyncService extends IntentService
                     mDate = match_data.getString(MATCH_DATE);
                     mTime = mDate.substring(mDate.indexOf("T") + 1, mDate.indexOf("Z"));
                     mDate = mDate.substring(0,mDate.indexOf("T"));
-                    SimpleDateFormat match_date = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
+                    SimpleDateFormat match_date = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss", Locale.getDefault());
                     match_date.setTimeZone(TimeZone.getTimeZone("UTC"));
                     try {
                         Date parsedDate = match_date.parse(mDate+mTime);
-                        SimpleDateFormat new_date = new SimpleDateFormat("yyyy-MM-dd:HH:mm");
+                        SimpleDateFormat new_date = new SimpleDateFormat("yyyy-MM-dd:HH:mm", Locale.getDefault());
                         new_date.setTimeZone(TimeZone.getDefault());
                         mDate = new_date.format(parsedDate);
                         mTime = mDate.substring(mDate.indexOf(":") + 1);
@@ -216,7 +216,7 @@ public class ScoresSyncService extends IntentService
                         if(!isReal){
                             //This if statement changes the dummy data's date to match our current date range.
                             Date fragmentDate = new Date(System.currentTimeMillis()+((i-2)*86400000));
-                            SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                             mDate=mFormat.format(fragmentDate);
                         }
                     }
