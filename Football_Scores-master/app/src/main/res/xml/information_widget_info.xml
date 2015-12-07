@@ -2,10 +2,9 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:minWidth="@dimen/widget_default_width"
     android:minHeight="@dimen/widget_default_height"
-    android:minResizeHeight="@dimen/widget_minimum_height"
-    android:minResizeWidth="@dimen/widget_minimum_width"
+    android:minResizeHeight="@dimen/widget_min_resize_height"
+    android:minResizeWidth="@dimen/widget_min_resize_width"
     android:updatePeriodMillis="@string/widget_update_time"
-    android:previewImage="@drawable/ic_launcher"
-    android:initialLayout="@layout/collection_widget_item"
-    android:resizeMode="horizontal|vertical">
+    android:previewImage="@drawable/preview_info"
+    android:initialLayout="@layout/information_widget">
 </appwidget-provider>

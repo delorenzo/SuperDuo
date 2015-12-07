@@ -23,17 +23,19 @@ import barqsoft.footballscores.data.FootballScoresContract;
 public class CollectionWidgetService extends RemoteViewsService {
 
     private static final String[] SCORE_COLUMNS = {
+            FootballScoresContract.ScoresEntry._ID,
             FootballScoresContract.ScoresEntry.HOME_COL,
             FootballScoresContract.ScoresEntry.HOME_GOALS_COL,
             FootballScoresContract.ScoresEntry.AWAY_GOALS_COL,
             FootballScoresContract.ScoresEntry.AWAY_COL,
             FootballScoresContract.ScoresEntry.MATCH_ID
     };
-    private static final int INDEX_HOME_TEAM = 0;
-    private static final int INDEX_HOME_GOALS = 1;
-    private static final int INDEX_AWAY_GOALS = 2;
-    private static final int INDEX_AWAY_TEAM = 3;
-    private static final int INDEX_MATCH_ID = 4;
+    static final int INDEX_ID = 0;
+    static final int INDEX_HOME_TEAM = 1;
+    static final int INDEX_HOME_GOALS = 2;
+    static final int INDEX_AWAY_GOALS = 3;
+    static final int INDEX_AWAY_TEAM = 4;
+    static final int INDEX_MATCH_ID = 5;
 
     public static final String LOG_TAG = CollectionWidgetService.class.getSimpleName();
 
@@ -43,7 +45,6 @@ public class CollectionWidgetService extends RemoteViewsService {
             private Cursor data = null;
             @Override
             public void onCreate() {
-
             }
 
             @Override
@@ -58,12 +59,13 @@ public class CollectionWidgetService extends RemoteViewsService {
                         Locale.getDefault());
                 final long identityToken = Binder.clearCallingIdentity();
                 Uri scoresUri = FootballScoresContract.ScoresEntry.buildScoreWithDate();
-                Cursor data = getContentResolver().query(
+                data = getContentResolver().query(
                         FootballScoresContract.ScoresEntry.buildScoreWithDate(),
                         SCORE_COLUMNS,
                         null,
                         currentDateString,
-                        FootballScoresContract.ScoresEntry.DATE_COL + " ASC"
+                        //FootballScoresContract.ScoresEntry.DATE_COL + " ASC"
+                        null
                 );
                 Binder.restoreCallingIdentity(identityToken);
             }
@@ -127,7 +129,7 @@ public class CollectionWidgetService extends RemoteViewsService {
             @Override
             public long getItemId(int position) {
                 if (data.moveToPosition(position)) {
-                    return data.getLong(INDEX_MATCH_ID);
+                    return data.getLong(INDEX_ID);
                 }
                 return position;
             }

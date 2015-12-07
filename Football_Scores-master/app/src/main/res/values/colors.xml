@@ -81,4 +81,7 @@
 
     <color name="white">#FFF</color>
     <color name="black">#000</color>
+    <color name="grey">#777</color>
+    <color name="slate_grey">#2f4f4f</color>
+    <color name="grey_700">#646464</color>
 </resources>

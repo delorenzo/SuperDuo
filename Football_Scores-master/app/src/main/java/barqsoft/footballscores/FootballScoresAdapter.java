@@ -13,15 +13,6 @@ import android.widget.TextView;
 
 public class FootballScoresAdapter extends CursorAdapter
 {
-    public static final int COL_HOME = 3;
-    public static final int COL_AWAY = 4;
-    public static final int COL_HOME_GOALS = 6;
-    public static final int COL_AWAY_GOALS = 7;
-    public static final int COL_DATE = 1;
-    public static final int COL_LEAGUE = 5;
-    public static final int COL_MATCHDAY = 9;
-    public static final int COL_ID = 8;
-    public static final int COL_MATCHTIME = 2;
     public double detail_match_id = 0;
     public FootballScoresAdapter(Context context, Cursor cursor, int flags)
     {
@@ -41,13 +32,16 @@ public class FootballScoresAdapter extends CursorAdapter
     public void bindView(View view, final Context context, Cursor cursor)
     {
         final ViewHolder mHolder = (ViewHolder) view.getTag();
-        String homeTeamName = cursor.getString(COL_HOME);
-        String awayTeamName = cursor.getString(COL_AWAY);
+        String homeTeamName = cursor.getString(MainScreenFragment.INDEX_HOME_TEAM);
+        String awayTeamName = cursor.getString(MainScreenFragment.INDEX_AWAY_TEAM);
         mHolder.homeName.setText(homeTeamName);
         mHolder.awayName.setText(awayTeamName);
-        mHolder.date.setText(cursor.getString(COL_MATCHTIME));
-        mHolder.score.setText(Utilities.getScores(context, cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));
-        mHolder.matchId = cursor.getDouble(COL_ID);
+        mHolder.date.setText(cursor.getString(MainScreenFragment.INDEX_MATCH_TIME));
+        mHolder.score.setText(Utilities.getScores(
+                context,
+                cursor.getInt(MainScreenFragment.INDEX_HOME_GOALS),
+                cursor.getInt(MainScreenFragment.INDEX_AWAY_GOALS)));
+        mHolder.matchId = cursor.getDouble(MainScreenFragment.INDEX_MATCH_ID);
         mHolder.homeCrest.setImageResource(Utilities.getTeamCrestByTeamName(homeTeamName));
         mHolder.homeCrest.setContentDescription(
                 String.format(context.getString(R.string.home_crest), homeTeamName));
@@ -63,10 +57,13 @@ public class FootballScoresAdapter extends CursorAdapter
             container.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
                     , ViewGroup.LayoutParams.MATCH_PARENT));
             TextView matchDay = (TextView) v.findViewById(R.id.matchday_textview);
-            matchDay.setText(Utilities.getMatchDay(context, cursor.getInt(COL_MATCHDAY),
-                    cursor.getInt(COL_LEAGUE)));
+            int leagueId = cursor.getInt(MainScreenFragment.INDEX_LEAGUE);
+            matchDay.setText(Utilities.getMatchDay(
+                    context,
+                    cursor.getInt(MainScreenFragment.INDEX_MATCH_DAY),
+                    leagueId));
             TextView league = (TextView) v.findViewById(R.id.league_textview);
-            league.setText(Utilities.getLeague(context, cursor.getInt(COL_LEAGUE)));
+            league.setText(Utilities.getLeague(context, leagueId));
             Button share_button = (Button) v.findViewById(R.id.share_button);
             share_button.setOnClickListener(new View.OnClickListener() {
                 @Override

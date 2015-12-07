@@ -38,15 +38,25 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
     private int lastSelectedItem = -1;
 
     private static final String[] SCORE_COLUMNS = {
+            FootballScoresContract.ScoresEntry._ID,
             FootballScoresContract.ScoresEntry.HOME_COL,
             FootballScoresContract.ScoresEntry.HOME_GOALS_COL,
             FootballScoresContract.ScoresEntry.AWAY_GOALS_COL,
-            FootballScoresContract.ScoresEntry.AWAY_COL
+            FootballScoresContract.ScoresEntry.AWAY_COL,
+            FootballScoresContract.ScoresEntry.LEAGUE_COL,
+            FootballScoresContract.ScoresEntry.MATCH_DAY,
+            FootballScoresContract.ScoresEntry.TIME_COL,
+            FootballScoresContract.ScoresEntry.MATCH_ID
     };
-    private static final int INDEX_HOME_TEAM = 0;
-    private static final int INDEX_HOME_GOALS = 1;
-    private static final int INDEX_AWAY_GOALS = 2;
-    private static final int INDEX_AWAY_TEAM = 3;
+    static final int INDEX_SCORE_ID = 0;
+    static final int INDEX_HOME_TEAM = 1;
+    static final int INDEX_HOME_GOALS = 2;
+    static final int INDEX_AWAY_GOALS = 3;
+    static final int INDEX_AWAY_TEAM = 4;
+    static final int INDEX_LEAGUE = 5;
+    static final int INDEX_MATCH_DAY = 6;
+    static final int INDEX_MATCH_TIME = 7;
+    static final int INDEX_MATCH_ID = 8;
 
     public MainScreenFragment()
     {
@@ -111,7 +121,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         return new CursorLoader(
                 getActivity(),
                 FootballScoresContract.ScoresEntry.buildScoreWithDate(),
-                null,
+                SCORE_COLUMNS,
                 null,
                 fragmentDateString,
                 null);

@@ -2,6 +2,7 @@ package barqsoft.footballscores.widget;
 
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -16,8 +17,6 @@ import barqsoft.footballscores.R;
 public class CollectionWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
-
         for (int appWidgetId : appWidgetIds) {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.collection_widget);
 
@@ -31,6 +30,11 @@ public class CollectionWidgetProvider extends AppWidgetProvider {
             else {
                 setRemoteAdapterV11(context, views);
             }
+            Intent clickIntentTemplate = new Intent(context, MainActivity.class);
+            PendingIntent clickPendingIntentTemplate = TaskStackBuilder.create(context)
+                    .addNextIntentWithParentStack(clickIntentTemplate)
+                    .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            views.setPendingIntentTemplate(R.id.collection_widget_list, clickPendingIntentTemplate);
             views.setEmptyView(R.id.collection_widget_list, R.id.collection_widget_empty);
 
             appWidgetManager.updateAppWidget(appWidgetId, views);

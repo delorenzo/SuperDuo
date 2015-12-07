@@ -14,10 +14,15 @@
     <!-- widget width, height defaults -->
     <dimen name="widget_default_width">110dp</dimen>
     <dimen name="widget_default_height">40dp</dimen>
-    <dimen name="widget_minimum_height">40dp</dimen>
-    <dimen name="widget_minimum_width">40dp</dimen>
+    <dimen name="widget_min_resize_height">40dp</dimen>
+    <dimen name="widget_min_resize_width">40dp</dimen>
     <dimen name="widget_padding">8dp</dimen>
-    <dimen name="widget_list_text_size">40dp</dimen>
+    <dimen name="widget_list_text_size">40sp</dimen>
+    <dimen name="collection_widget_item_text_size">10sp</dimen>
+    <dimen name="collection_widget_default_width">250dp</dimen>
+    <dimen name="collection_widget_default_height">180dp</dimen>
+    <dimen name="collection_widget_min_resize_width">220dp</dimen>
+    <dimen name="collection_widget_min_resize_height">180dp</dimen>
 
     <!-- card attributes -->
     <dimen name="card_vertical_margin">10dp</dimen>

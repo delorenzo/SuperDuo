@@ -100,4 +100,5 @@
     <string name="day_title_format" translatable="false">
         <xliff:g example="Today">%1$s</xliff:g>, <xliff:g example="Nov 5">%2$s</xliff:g>
     </string>
+
 </resources>

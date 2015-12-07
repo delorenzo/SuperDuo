@@ -1,48 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.GridLayout
+<GridLayout
     android:id="@+id/collection_widget_item"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:columnCount="3">
+    android:columnCount="3">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/home_team"
         android:padding="@dimen/widget_padding"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/slate_grey"
+        android:layout_columnWeight="0"
+        android:textSize="@dimen/collection_widget_item_text_size"
+        android:layout_gravity="center_horizontal|clip_horizontal"
         tools:text="SC Paderborn 07"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/widget_padding"
-        android:textSize="@dimen/widget_list_text_size"
+        android:textAppearance="?android:textAppearanceLarge"
         android:id="@+id/score"
-        app:layout_gravity="center"
-        app:layout_rowSpan="2"
+        android:layout_gravity="fill|center"
+        android:gravity="center"
+        android:layout_columnWeight="1"
+        android:layout_rowSpan="2"
         tools:text="4 - 4"
         android:textColor="@color/black"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/slate_grey"
+        android:textSize="@dimen/collection_widget_item_text_size"
         android:padding="@dimen/widget_padding"
+        android:layout_gravity="center_horizontal|clip_horizontal"
         android:id="@+id/away_team"
+        android:layout_columnWeight="0"
         tools:text="Armini Bielefield"/>
     <ImageView
         android:layout_width="@dimen/list_icon"
         android:layout_height="@dimen/list_icon"
         android:id="@+id/home_crest"
         android:contentDescription="@string/home_crest"
-        app:layout_gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_columnWeight="1"
         tools:src="@drawable/arsenal"/>
     <ImageView
         android:layout_width="@dimen/list_icon"
         android:layout_height="@dimen/list_icon"
         android:id="@+id/away_crest"
         android:contentDescription="@string/away_crest"
-        app:layout_gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_columnWeight="1"
         tools:src="@drawable/arsenal"/>
-</android.support.v7.widget.GridLayout>
+</GridLayout>

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:minWidth="@dimen/widget_default_width"
-    android:minHeight="@dimen/widget_default_height"
-    android:minResizeHeight="@dimen/widget_minimum_height"
-    android:minResizeWidth="@dimen/widget_minimum_width"
+    android:minWidth="@dimen/collection_widget_default_width"
+    android:minHeight="@dimen/collection_widget_default_height"
+    android:minResizeHeight="@dimen/collection_widget_min_resize_height"
+    android:minResizeWidth="@dimen/collection_widget_min_resize_width"
     android:updatePeriodMillis="@string/widget_update_time"
-    android:previewImage="@drawable/ic_launcher"
-    android:initialLayout="@layout/collection_widget">
+    android:initialKeyguardLayout="@layout/collection_widget"
+    android:previewImage="@drawable/preview_collection"
+    android:initialLayout="@layout/collection_widget"
+    android:resizeMode="horizontal|vertical">
 </appwidget-provider>

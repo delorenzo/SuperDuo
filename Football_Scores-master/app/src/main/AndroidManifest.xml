@@ -39,11 +39,11 @@
         <service android:name=".service.ScoresSyncService" />
 
         <!-- Information widget provider -->
-        <receiver android:name=".widget.InformationWidgetProvider"
+        <receiver
+            android:name=".widget.InformationWidgetProvider"
             android:label="@string/title_information_widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="com.example.android.sunshine.app.ACTION_DATA_UPDATED" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/information_widget_info"/>
@@ -56,18 +56,21 @@
 
         <!-- Collection widget provider -->
         <receiver android:name=".widget.CollectionWidgetProvider"
+            android:enabled="true"
             android:label="@string/title_collection_widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="com.example.android.sunshine.app.ACTION_DATA_UPDATED" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/information_widget_info"/>
+                android:resource="@xml/collection_widget_info"/>
         </receiver>
 
         <!-- Collection widget service -->
         <service
-            android:name=".widget.CollectionWidgetService">
+            android:name=".widget.CollectionWidgetService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS">
         </service>
     </application>
 

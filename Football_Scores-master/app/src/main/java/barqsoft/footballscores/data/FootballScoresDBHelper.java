@@ -9,7 +9,7 @@ import barqsoft.footballscores.data.FootballScoresContract.ScoresEntry;
 public class FootballScoresDBHelper extends SQLiteOpenHelper
 {
     public static final String DATABASE_NAME = "Scores.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     public FootballScoresDBHelper(Context context)
     {
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
@@ -19,15 +19,15 @@ public class FootballScoresDBHelper extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase db)
     {
         final String CreateScoresTable = "CREATE TABLE " + FootballScoresContract.SCORES_TABLE + " ("
-                + ScoresEntry._ID + " INTEGER PRIMARY KEY,"
-                + FootballScoresContract.ScoresEntry.DATE_COL + " TEXT NOT NULL,"
+                + FootballScoresContract.ScoresEntry._ID + " INTEGER PRIMARY KEY,"
+                + ScoresEntry.DATE_COL + " TEXT NOT NULL,"
                 + FootballScoresContract.ScoresEntry.TIME_COL + " INTEGER NOT NULL,"
-                + FootballScoresContract.ScoresEntry.HOME_COL + " TEXT NOT NULL,"
+                + ScoresEntry.HOME_COL + " TEXT NOT NULL,"
                 + FootballScoresContract.ScoresEntry.AWAY_COL + " TEXT NOT NULL,"
                 + FootballScoresContract.ScoresEntry.LEAGUE_COL + " INTEGER NOT NULL,"
                 + FootballScoresContract.ScoresEntry.HOME_GOALS_COL + " TEXT NOT NULL,"
                 + FootballScoresContract.ScoresEntry.AWAY_GOALS_COL + " TEXT NOT NULL,"
-                + ScoresEntry.MATCH_ID + " INTEGER NOT NULL,"
+                + FootballScoresContract.ScoresEntry.MATCH_ID + " INTEGER NOT NULL,"
                 + ScoresEntry.MATCH_DAY + " INTEGER NOT NULL,"
                 + " UNIQUE ("+ FootballScoresContract.ScoresEntry.MATCH_ID+") ON CONFLICT REPLACE"
                 + " );";
@@ -37,7 +37,9 @@ public class FootballScoresDBHelper extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-        //Remove old values when upgrading.
-        db.execSQL("DROP TABLE IF EXISTS " + FootballScoresContract.SCORES_TABLE);
+        if (oldVersion < 3) {
+            //Remove old values when upgrading.
+            db.execSQL("DROP TABLE IF EXISTS " + FootballScoresContract.SCORES_TABLE);
+        }
     }
 }

@@ -98,6 +98,19 @@ public class Utilities
             case "West Bromwich Albion" : return R.drawable.west_bromwich_albion_hd_logo;
             case "Sunderland AFC" : return R.drawable.sunderland;
             case "Stoke City FC" : return R.drawable.stoke_city;
+            case "SD Eibar" : return R.drawable.eibar;
+            case "Real Sociedad de Fútbol" : return R.drawable.real_sociedad;
+            case "Bologna FC":  return R.drawable.bologna;
+            case "SSC Napoli" : return R.drawable.napoli;
+            case "CA Osasuna" : return R.drawable.osasuna;
+            case "SD Ponferradina" : return R.drawable.sd_ponferradina;
+            case "Fortuna Düsseldorf": return R.drawable.fortuna;
+            case "Eintracht Braunschweig": return R.drawable.eintracht;
+            case "RCD Espanyol": return R.drawable.rcd_espanyol;
+            case "Levante UD": return R.drawable.levante;
+            case "Athletic Bilbao B": return R.drawable.athletic_bilbao;
+            case "Real Zaragoza": return R.drawable.real_zaragoza;
+            case "Crystal Palace FC": return R.drawable.crystal_palace;
             default: return R.drawable.no_icon;
         }
     }

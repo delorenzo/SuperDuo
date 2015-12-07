@@ -3,20 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_margin="@dimen/widget_margin"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/information_widget"
     android:layout_height="wrap_content">
-    <android.support.v7.widget.GridLayout
+    <GridLayout
+        android:id="@+id/information_widget"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        app:columnCount="3"
-        app:rowCount="3">
+        android:columnCount="3"
+        android:rowCount="3">
         <TextView
+            android:padding="@dimen/widget_padding"
             android:id="@+id/home_team"
-            app:layout_gravity="center"
-            app:layout_columnSpan="3"
+            android:layout_gravity="center"
+            android:layout_columnSpan="3"
             android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/grey_700"
             tools:text="SC Paderborn 07"/>
         <ImageView
             android:padding="@dimen/list_icon_padding"
@@ -24,26 +25,33 @@
             android:layout_height="@dimen/list_icon"
             android:id="@+id/home_crest"
             tools:src="@drawable/aston_villa"
-            app:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_gravity="start"
             android:contentDescription="@string/home_crest"/>
         <TextView
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/score"
-            app:layout_gravity="center"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:textColor="@color/black"
             tools:text="4 - 4"/>
         <ImageView
+            android:layout_columnWeight="1"
             android:padding="@dimen/list_icon_padding"
             android:layout_width="@dimen/list_icon"
             android:layout_height="@dimen/list_icon"
             android:id="@+id/away_crest"
             tools:src="@drawable/newcastle_united"
-            app:layout_gravity="center"
+            android:layout_gravity="end"
             android:contentDescription="@string/away_crest"/>
         <TextView
+            android:padding="@dimen/widget_padding"
             android:id="@+id/away_team"
-            app:layout_gravity="center"
+            android:layout_gravity="center"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            app:layout_columnSpan="3"
+            android:layout_columnSpan="3"
+            android:textColor="@color/grey_700"
             tools:text="Armini Bielefield"/>
-    </android.support.v7.widget.GridLayout>
+    </GridLayout>
 </FrameLayout>

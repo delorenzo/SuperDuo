@@ -29,15 +29,17 @@ public class InformationWidgetService extends IntentService {
     public InformationWidgetService() { super("InformationWidgetService"); }
 
     private static final String[] SCORE_COLUMNS = {
+            FootballScoresContract.ScoresEntry.MATCH_ID,
             FootballScoresContract.ScoresEntry.HOME_COL,
             FootballScoresContract.ScoresEntry.HOME_GOALS_COL,
             FootballScoresContract.ScoresEntry.AWAY_GOALS_COL,
             FootballScoresContract.ScoresEntry.AWAY_COL
     };
-    private static final int INDEX_HOME_TEAM = 0;
-    private static final int INDEX_HOME_GOALS = 1;
-    private static final int INDEX_AWAY_GOALS = 2;
-    private static final int INDEX_AWAY_TEAM = 3;
+    static final int INDEX_MATCH_ID = 0;
+    static final int INDEX_HOME_TEAM = 1;
+    static final int INDEX_HOME_GOALS = 2;
+    static final int INDEX_AWAY_GOALS = 3;
+    static final int INDEX_AWAY_TEAM = 4;
 
     @Nullable
     @Override
@@ -63,7 +65,8 @@ public class InformationWidgetService extends IntentService {
                 SCORE_COLUMNS,
                 null,
                 currentDateString,
-                FootballScoresContract.ScoresEntry.DATE_COL + " ASC"
+                //FootballScoresContract.ScoresEntry.DATE_COL + " ASC"
+                null
         );
 
         if (data == null) {
@@ -101,7 +104,7 @@ public class InformationWidgetService extends IntentService {
                         String.format(context.getString(R.string.away_crest), awayTeam)
                 );
             }
-            views.setOnClickPendingIntent(R.id.information_widget, pendingIntent);
+            views.setOnClickPendingIntent(layoutId, pendingIntent);
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }
