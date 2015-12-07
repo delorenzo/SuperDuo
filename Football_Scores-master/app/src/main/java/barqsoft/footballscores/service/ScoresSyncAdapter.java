@@ -1,10 +1,13 @@
 package barqsoft.footballscores.service;
 
-import android.app.IntentService;
+import android.accounts.Account;
+import android.content.AbstractThreadedSyncAdapter;
+import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
+import android.content.SyncResult;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -26,17 +29,19 @@ import java.util.Vector;
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.data.FootballScoresContract;
 
-public class ScoresSyncService extends IntentService
-{
-    public static final String LOG_TAG = "ScoresSyncService";
-    public ScoresSyncService()
-    {
-        super("ScoresSyncService");
+public class ScoresSyncAdapter extends AbstractThreadedSyncAdapter {
+    public static final String ACTION_DATA_UPDATED = "barqsoft.footballscores.app.ACTION_DATA_UPDATED";
+    public static final String LOG_TAG = ScoresSyncAdapter.class.getSimpleName();
+    private Context mContext;
+
+    public ScoresSyncAdapter(Context context, boolean autoInitialize) {
+        super(context, autoInitialize);
+        mContext = context;
     }
 
     @Override
-    protected void onHandleIntent(Intent intent)
-    {
+    public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
+        Log.d(LOG_TAG, "Starting sync");
         getData("n2");
         getData("p2");
     }
@@ -58,7 +63,7 @@ public class ScoresSyncService extends IntentService
             URL fetch = new URL(fetch_build.toString());
             m_connection = (HttpURLConnection) fetch.openConnection();
             m_connection.setRequestMethod("GET");
-            m_connection.addRequestProperty("X-Auth-Token",getString(R.string.api_key));
+            m_connection.addRequestProperty("X-Auth-Token",mContext.getString(R.string.api_key));
             m_connection.connect();
 
             // Read the input stream into a String
@@ -110,12 +115,12 @@ public class ScoresSyncService extends IntentService
                 if (matches.length() == 0) {
                     //if there is no data, call the function on dummy data
                     //this is expected behavior during the off season.
-                    processJSONdata(getString(R.string.dummy_data), getApplicationContext(), false);
+                    processJSONdata(mContext.getString(R.string.dummy_data), mContext, false);
                     return;
                 }
 
 
-                processJSONdata(JSON_data, getApplicationContext(), true);
+                processJSONdata(JSON_data, mContext, true);
             } else {
                 //Could not Connect
                 Log.d(LOG_TAG, "Could not connect to server.");
@@ -126,6 +131,7 @@ public class ScoresSyncService extends IntentService
             Log.e(LOG_TAG,e.getMessage());
         }
     }
+
     private void processJSONdata (String JSONdata,Context mContext, boolean isReal)
     {
         //JSON data
@@ -260,4 +266,3 @@ public class ScoresSyncService extends IntentService
 
     }
 }
-

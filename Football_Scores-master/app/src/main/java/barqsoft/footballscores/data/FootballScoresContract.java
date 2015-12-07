@@ -4,13 +4,16 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-/**
- * Created by yehya khaled on 2/25/2015.
- */
 public class FootballScoresContract
 {
-    public static final String SCORES_TABLE = "scores_table";
-    public static final class scores_table implements BaseColumns
+    public static final String SCORES_TABLE = "ScoresEntry";
+
+    //possible paths
+    public static final String PATH_LEAGUE = "league";
+    public static final String PATH_ID = "id";
+    public static final String PATH_DATE = "date";
+
+    public static final class ScoresEntry implements BaseColumns
     {
         //Table data
         public static final String LEAGUE_COL = "league";
@@ -23,8 +26,7 @@ public class FootballScoresContract
         public static final String MATCH_ID = "match_id";
         public static final String MATCH_DAY = "match_day";
 
-        //public static Uri SCORES_CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH)
-                //.build();
+        public static Uri SCORES_CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH).build();
 
         //Types
         public static final String CONTENT_TYPE =

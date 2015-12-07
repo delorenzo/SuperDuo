@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-/**
- * Created by yehya khaled on 2/26/2015.
- */
+
 public class FootballScoresAdapter extends CursorAdapter
 {
     public static final int COL_HOME = 3;
@@ -43,13 +41,13 @@ public class FootballScoresAdapter extends CursorAdapter
     public void bindView(View view, final Context context, Cursor cursor)
     {
         final ViewHolder mHolder = (ViewHolder) view.getTag();
-        mHolder.homeName.setText(cursor.getString(COL_HOME));
-        mHolder.awayName.setText(cursor.getString(COL_AWAY));
+        String homeTeamName = cursor.getString(COL_HOME);
+        String awayTeamName = cursor.getString(COL_AWAY);
+        mHolder.homeName.setText(homeTeamName);
+        mHolder.awayName.setText(awayTeamName);
         mHolder.date.setText(cursor.getString(COL_MATCHTIME));
         mHolder.score.setText(Utilities.getScores(context, cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));
         mHolder.matchId = cursor.getDouble(COL_ID);
-        String homeTeamName = cursor.getString(COL_HOME);
-        String awayTeamName = cursor.getString(COL_AWAY);
         mHolder.homeCrest.setImageResource(Utilities.getTeamCrestByTeamName(homeTeamName));
         mHolder.homeCrest.setContentDescription(
                 String.format(context.getString(R.string.home_crest), homeTeamName));

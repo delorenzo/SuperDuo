@@ -35,6 +35,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="barqsoft.footballscores.MainActivity" />
         </activity>
+
         <service android:name=".service.ScoresSyncService" />
 
         <!-- Information widget provider -->

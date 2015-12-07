@@ -8,9 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
-/**
- * Created by yehya khaled on 2/25/2015.
- */
 public class FootballScoresProvider extends ContentProvider
 {
     private static FootballScoresDBHelper mOpenHelper;
@@ -21,20 +18,20 @@ public class FootballScoresProvider extends ContentProvider
     private UriMatcher muriMatcher = buildUriMatcher();
     private static final SQLiteQueryBuilder ScoreQuery =
             new SQLiteQueryBuilder();
-    private static final String SCORES_BY_LEAGUE = FootballScoresContract.scores_table.LEAGUE_COL + " = ?";
+    private static final String SCORES_BY_LEAGUE = FootballScoresContract.ScoresEntry.LEAGUE_COL + " = ?";
     private static final String SCORES_BY_DATE =
-            FootballScoresContract.scores_table.DATE_COL + " LIKE ?";
+            FootballScoresContract.ScoresEntry.DATE_COL + " LIKE ?";
     private static final String SCORES_BY_ID =
-            FootballScoresContract.scores_table.MATCH_ID + " = ?";
+            FootballScoresContract.ScoresEntry.MATCH_ID + " = ?";
 
 
     static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = FootballScoresContract.BASE_CONTENT_URI.toString();
         matcher.addURI(authority, null , MATCHES);
-        matcher.addURI(authority, "league" , MATCHES_WITH_LEAGUE);
-        matcher.addURI(authority, "id" , MATCHES_WITH_ID);
-        matcher.addURI(authority, "date" , MATCHES_WITH_DATE);
+        matcher.addURI(authority, FootballScoresContract.PATH_LEAGUE , MATCHES_WITH_LEAGUE);
+        matcher.addURI(authority, FootballScoresContract.PATH_ID , MATCHES_WITH_ID);
+        matcher.addURI(authority, FootballScoresContract.PATH_DATE, MATCHES_WITH_DATE);
         return matcher;
     }
 
@@ -46,15 +43,15 @@ public class FootballScoresProvider extends ContentProvider
            {
                return MATCHES;
            }
-           else if(link.contentEquals(FootballScoresContract.scores_table.buildScoreWithDate().toString()))
+           else if(link.contentEquals(FootballScoresContract.ScoresEntry.buildScoreWithDate().toString()))
            {
                return MATCHES_WITH_DATE;
            }
-           else if(link.contentEquals(FootballScoresContract.scores_table.buildScoreWithId().toString()))
+           else if(link.contentEquals(FootballScoresContract.ScoresEntry.buildScoreWithId().toString()))
            {
                return MATCHES_WITH_ID;
            }
-           else if(link.contentEquals(FootballScoresContract.scores_table.buildScoreWithLeague().toString()))
+           else if(link.contentEquals(FootballScoresContract.ScoresEntry.buildScoreWithLeague().toString()))
            {
                return MATCHES_WITH_LEAGUE;
            }
@@ -80,13 +77,13 @@ public class FootballScoresProvider extends ContentProvider
         final int match = muriMatcher.match(uri);
         switch (match) {
             case MATCHES:
-                return FootballScoresContract.scores_table.CONTENT_TYPE;
+                return FootballScoresContract.ScoresEntry.CONTENT_TYPE;
             case MATCHES_WITH_LEAGUE:
-                return FootballScoresContract.scores_table.CONTENT_TYPE;
+                return FootballScoresContract.ScoresEntry.CONTENT_TYPE;
             case MATCHES_WITH_ID:
-                return FootballScoresContract.scores_table.CONTENT_ITEM_TYPE;
+                return FootballScoresContract.ScoresEntry.CONTENT_ITEM_TYPE;
             case MATCHES_WITH_DATE:
-                return FootballScoresContract.scores_table.CONTENT_TYPE;
+                return FootballScoresContract.ScoresEntry.CONTENT_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri :" + uri );
         }

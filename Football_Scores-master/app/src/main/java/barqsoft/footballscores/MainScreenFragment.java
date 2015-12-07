@@ -37,6 +37,17 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
     private String[] fragmentDateString = new String[1];
     private int lastSelectedItem = -1;
 
+    private static final String[] SCORE_COLUMNS = {
+            FootballScoresContract.ScoresEntry.HOME_COL,
+            FootballScoresContract.ScoresEntry.HOME_GOALS_COL,
+            FootballScoresContract.ScoresEntry.AWAY_GOALS_COL,
+            FootballScoresContract.ScoresEntry.AWAY_COL
+    };
+    private static final int INDEX_HOME_TEAM = 0;
+    private static final int INDEX_HOME_GOALS = 1;
+    private static final int INDEX_AWAY_GOALS = 2;
+    private static final int INDEX_AWAY_TEAM = 3;
+
     public MainScreenFragment()
     {
     }
@@ -51,7 +62,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         return fragment;
     }
 
-    private void update_scores()
+    private void updateScores()
     {
         Intent service_start = new Intent(getActivity(), ScoresSyncService.class);
         getActivity().startService(service_start);
@@ -73,7 +84,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
-        update_scores();
+        updateScores();
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, rootView);
 
@@ -97,8 +108,13 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle)
     {
-        return new CursorLoader(getActivity(), FootballScoresContract.scores_table.buildScoreWithDate(),
-                null,null, fragmentDateString, null);
+        return new CursorLoader(
+                getActivity(),
+                FootballScoresContract.ScoresEntry.buildScoreWithDate(),
+                null,
+                null,
+                fragmentDateString,
+                null);
     }
 
     @Override

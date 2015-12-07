@@ -17,9 +17,14 @@
     <dimen name="widget_minimum_height">40dp</dimen>
     <dimen name="widget_minimum_width">40dp</dimen>
     <dimen name="widget_padding">8dp</dimen>
+    <dimen name="widget_list_text_size">40dp</dimen>
 
     <!-- card attributes -->
     <dimen name="card_vertical_margin">10dp</dimen>
     <dimen name="card_radius">5dp</dimen>
     <dimen name="card_elevation">10dp</dimen>
+
+    <!--icon size -->
+    <dimen name="list_icon">40dp</dimen>
+    <dimen name="list_icon_padding">4dp</dimen>
 </resources>

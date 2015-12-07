@@ -18,13 +18,6 @@ public class InformationWidgetProvider extends AppWidgetProvider {
         }
     }
 
-//    @Override
-//    public void onReceive(Context context, Intent intent) {
-//        super.onReceive(context, intent);
-//        if (intent.getAction().equals())
-//    }
-
-
     @Override
     public void onAppWidgetOptionsChanged(Context context, AppWidgetManager appWidgetManager, int appWidgetId, Bundle newOptions) {
         super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions);
