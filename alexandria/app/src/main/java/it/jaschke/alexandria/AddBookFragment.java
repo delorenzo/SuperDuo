@@ -173,9 +173,11 @@ public class AddBookFragment extends Fragment implements LoaderManager.LoaderCal
         bookSubTitleView.setText(bookSubTitle);
 
         String authors = data.getString(data.getColumnIndex(BookContract.AuthorEntry.AUTHOR));
-        String[] authorsArr = authors.split(",");
-        authorsView.setLines(authorsArr.length);
-        authorsView.setText(authors.replace(",", "\n"));
+        if (authors != null) {
+            String[] authorsArr = authors.split(",");
+            authorsView.setLines(authorsArr.length);
+            authorsView.setText(authors.replace(",", "\n"));
+        }
 
         String imgUrl = data.getString(data.getColumnIndex(BookContract.BookEntry.IMAGE_URL));
         if(Patterns.WEB_URL.matcher(imgUrl).matches()){
