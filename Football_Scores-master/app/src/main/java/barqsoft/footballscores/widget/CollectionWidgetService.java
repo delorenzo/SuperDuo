@@ -64,7 +64,6 @@ public class CollectionWidgetService extends RemoteViewsService {
                         SCORE_COLUMNS,
                         null,
                         currentDateString,
-                        //FootballScoresContract.ScoresEntry.DATE_COL + " ASC"
                         null
                 );
                 Binder.restoreCallingIdentity(identityToken);
